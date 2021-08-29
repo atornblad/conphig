@@ -49,90 +49,88 @@ namespace ATornblad.Conphig
 
         private static void SetValue<T>(T config, PropertyInfo propertyInfo, string elementName, JsonElement value) where T : class, new()
         {
-            if (value.ValueKind == JsonValueKind.Null)
+            object valueToSet = GetValue(propertyInfo.PropertyType, elementName, value);
+            propertyInfo.SetValue(config, valueToSet);
+        }
+
+        private static object GetValue(Type outputType, string elementName, JsonElement value)
+        {
+            if (outputType.IsArray)
             {
-                if (propertyInfo.PropertyType.IsClass)
+                var elementType = outputType.GetElementType();
+
+                return Enumerable.Range(0, value.GetArrayLength())
+                    .Select(i => GetValue(elementType, $"{elementName}[{i}]", value[i]))
+                    .ToArrayOfType(elementType);
+            }
+
+            var nullable = Nullable.GetUnderlyingType(outputType);
+            if (nullable != null)
+            {
+                var inner = GetValue(nullable, elementName, value);
+                if (inner == null)
                 {
-                    propertyInfo.SetValue(config, null);
-                }
-                else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) != null)
-                {
-                    propertyInfo.SetValue(config, Activator.CreateInstance(propertyInfo.PropertyType));
+                    return null;
                 }
                 else
                 {
-                    throw new InvalidOperationException($"Converting JSON property {elementName} from null to {propertyInfo.PropertyType.FullName}");
+                    return Activator.CreateInstance(outputType, new object[] { inner });
                 }
+            }
+
+            if (value.ValueKind == JsonValueKind.Null)
+            {
+                return null;
             }
             else if (value.ValueKind == JsonValueKind.True || value.ValueKind == JsonValueKind.False)
             {
-                if (propertyInfo.PropertyType == typeof(bool))
+                if (outputType == typeof(bool))
                 {
-                    propertyInfo.SetValue(config, value.GetBoolean());
-                }
-                else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(bool))
-                {
-                    propertyInfo.SetValue(config, new bool?(value.GetBoolean()));
+                    return value.GetBoolean();
                 }
                 else
                 {
-                    throw new InvalidOperationException($"Converting JSON property {elementName} from boolean to {propertyInfo.PropertyType.FullName}");
+                    throw new InvalidOperationException($"Converting JSON property {elementName} from boolean to {outputType.FullName}");
                 }
             }
             else if (value.ValueKind == JsonValueKind.String)
             {
-                if (propertyInfo.PropertyType == typeof(string))
+                if (outputType == typeof(string))
                 {
-                    propertyInfo.SetValue(config, value.GetString());
+                    return value.GetString();
                 }
                 else
                 {
-                    propertyInfo.SetValue(config, Conversion.ChangeType(value.GetString(), propertyInfo.PropertyType));
+                    return Conversion.ChangeType(value.GetString(), outputType);
                 }
             }
             else if (value.ValueKind == JsonValueKind.Number)
             {
-                if (propertyInfo.PropertyType == typeof(int))
+                if (outputType == typeof(int))
                 {
-                    propertyInfo.SetValue(config, value.GetInt32());
+                    return value.GetInt32();
                 }
-                else if (propertyInfo.PropertyType == typeof(long))
+                else if (outputType == typeof(long))
                 {
-                    propertyInfo.SetValue(config, value.GetInt64());
+                    return value.GetInt64();
                 }
-                else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(int))
+                else if (outputType == typeof(float))
                 {
-                    propertyInfo.SetValue(config, new int?(value.GetInt32()));
+                    return value.GetSingle();
                 }
-                else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(long))
+                else if (outputType == typeof(double))
                 {
-                    propertyInfo.SetValue(config, new long?(value.GetInt64()));
-                }
-                else if (propertyInfo.PropertyType == typeof(float))
-                {
-                    propertyInfo.SetValue(config, value.GetSingle());
-                }
-                else if (propertyInfo.PropertyType == typeof(double))
-                {
-                    propertyInfo.SetValue(config, value.GetDouble());
-                }
-                else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(float))
-                {
-                    propertyInfo.SetValue(config, new float?(value.GetSingle()));
-                }
-                else if (Nullable.GetUnderlyingType(propertyInfo.PropertyType) == typeof(double))
-                {
-                    propertyInfo.SetValue(config, new double?(value.GetDouble()));
+                    return value.GetDouble();
                 }
                 else
                 {
                     try
                     {
-                        propertyInfo.SetValue(config, Conversion.ChangeType(value.GetString(), propertyInfo.PropertyType));
+                        return Conversion.ChangeType(value.GetString(), outputType);
                     }
                     catch
                     {
-                        throw new InvalidOperationException($"Converting JSON property {elementName} from string to {propertyInfo.PropertyType.FullName}");
+                        throw new InvalidOperationException($"Converting JSON property {elementName} from string to {outputType.FullName}");
                     }
                 }
             }

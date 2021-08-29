@@ -1,4 +1,5 @@
 ﻿using System;
+using ATornblad.Conphig;
 using NUnit.Framework;
 
 namespace ConphigTests
@@ -276,6 +277,18 @@ namespace ConphigTests
 
             // Assert
             Assert.AreEqual(new DateTime(1974, 5, 28, 10, 0, 0, DateTimeKind.Utc), env.NDTDefNull);
+        }
+
+        [Test]
+        public void ArrayTests()
+        {
+            // Arrange
+
+            // Act
+            var fileConfig = Config.Load<ArrayConfiguration>();
+
+            // Assert
+            Assert.AreEqual(new[] { "a", "b", "c" }, fileConfig.Strings);
         }
 
         [Test]
