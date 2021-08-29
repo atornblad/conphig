@@ -11,7 +11,7 @@
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
     <PackageTags>Configuration;.NET Core;.NET 5</PackageTags>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <Description>
       This helper library enables working with configuration data classes that automatically load settings from defaults, from JSON files, from command line arguments, and from environment variables.
     </Description>
@@ -45,7 +45,7 @@
     <Folder Include="Internals\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)">
+    <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
