@@ -289,6 +289,21 @@ namespace ConphigTests
 
             // Assert
             Assert.AreEqual(new[] { "a", "b", "c" }, fileConfig.Strings);
+            Assert.AreEqual(new[] { 1, 2, 3 }, fileConfig.Ints);
+            Assert.AreEqual(new[] { 10_000_000_000L, 20_000_000_000L, 30_000_000_000L }, fileConfig.Longs);
+            Assert.AreEqual(new[] { true, false, true }, fileConfig.Bools);
+            Assert.AreEqual(new[] { 1.1f, 2.2f, 3.3f }, fileConfig.Floats);
+            Assert.AreEqual(new[] { 4.4d, 5.5d, 6.6d }, fileConfig.Doubles);
+            Assert.AreEqual(new[] {
+                new DateTime(2021, 9, 30, 21, 37, 5, DateTimeKind.Utc),
+                new DateTime(1999, 12, 31, 23, 59, 59, DateTimeKind.Utc)
+            },
+            fileConfig.DateTimes);
+            Assert.AreEqual(new[] {
+                new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.FromMinutes(60)),
+                new DateTimeOffset(2014, 9, 20, 13, 30, 0, TimeSpan.FromMinutes(120))
+            },
+            fileConfig.DateTimeOffsets);
         }
 
         [Test]
