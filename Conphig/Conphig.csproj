@@ -11,16 +11,40 @@
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
     <PackageTags>Configuration;.NET Core;.NET 5</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>
       This helper library enables working with configuration data classes that automatically load settings from defaults, from JSON files, from command line arguments, and from environment variables.
     </Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>BeforeBuild</type>
+          <command>copy ../LICENSE ./LICENSE</command>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>BeforeBuild</type>
+          <command>copy ../LICENSE ./LICENSE</command>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Internals\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Internals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
 </Project>
