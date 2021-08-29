@@ -7,8 +7,8 @@
 
   <PropertyGroup>
     <PackageId>Conphig</PackageId>
-    <Version>0.9.0</Version>
-    <PackageVersion>0.9.0</PackageVersion>
+    <Version>0.9.1</Version>
+    <PackageVersion>0.9.1</PackageVersion>
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
     <PackageTags>Configuration;.NET Core;.NET 5</PackageTags>
@@ -20,6 +20,10 @@
     <PackageProjectUrl>https://atornblad.se/conphig</PackageProjectUrl>
     <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+      v0.9.0 : First release
+      v0.9.1 : Added support for array properties
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
