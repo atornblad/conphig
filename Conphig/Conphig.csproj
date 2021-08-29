@@ -45,7 +45,8 @@
     <Folder Include="Internals\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="../LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)"><CopyToOutputDirectory>Always</CopyToOutputDirectory>
-</None>
+    <None Include="LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
