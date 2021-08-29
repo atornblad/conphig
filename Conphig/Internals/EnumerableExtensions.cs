@@ -45,11 +45,16 @@ namespace ATornblad.Conphig.Internals
 
         public static int IndexOfAny<T>(this T[] array, IEnumerable<T> values) where T : IEquatable<T>
         {
+            return IndexOfAny(array, values, 0);
+        }
+
+        public static int IndexOfAny<T>(this T[] array, IEnumerable<T> values, int startAt) where T : IEquatable<T>
+        {
             if (array == null)
             {
                 return -1;
             }
-            for (int i = 0; i < array.Length; ++i)
+            for (int i = startAt; i < array.Length; ++i)
             {
                 if (values.Contains(array[i]))
                 {

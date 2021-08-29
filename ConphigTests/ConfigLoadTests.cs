@@ -304,6 +304,25 @@ namespace ConphigTests
                 new DateTimeOffset(2014, 9, 20, 13, 30, 0, TimeSpan.FromMinutes(120))
             },
             fileConfig.DateTimeOffsets);
+
+            // Arrange
+            Config.CommandLineArgsGetter = () => new[] {
+                "--string", "A", "-s", "B", "--string", "C",
+                "--int", "10", "-i", "20", "--int", "30",
+                "--dto", "1974-04-19T15:00:00+01:00", "-d", "1933-02-04T04:17:01+05:00"
+            };
+
+            // Act
+            var cliConfig = Config.Load<ArrayConfiguration>("non-existing.json");
+
+            // Assert
+            Assert.AreEqual(new[] { "A", "B", "C" }, cliConfig.Strings);
+            Assert.AreEqual(new[] { 10, 20, 30 }, cliConfig.Ints);
+            Assert.AreEqual(new[] {
+                new DateTimeOffset(1974, 4, 19, 15, 0, 0, TimeSpan.FromMinutes(60)),
+                new DateTimeOffset(1933, 2, 4, 4, 17, 1, TimeSpan.FromMinutes(300))
+            },
+            cliConfig.DateTimeOffsets);
         }
 
         [Test]
