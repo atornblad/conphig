@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>ATornblad.Conphig</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Internals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Internals\" />
+  </ItemGroup>
+</Project>
