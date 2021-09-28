@@ -5,6 +5,18 @@
     <RootNamespace>ATornblad.Conphig</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Conphig</PackageId>
+    <Version>0.9.0</Version>
+    <Authors>Anders Marzi Tornblad</Authors>
+    <Company>Anders Marzi Tornblad</Company>
+    <PackageTags>Configuration;.NET Core;.NET 5</PackageTags>
+    <Description>
+      This helper library enables working with configuration data classes that automatically load settings from defaults, from JSON files, from command line arguments, and from environment variables.
+    </Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Internals\" />
   </ItemGroup>
