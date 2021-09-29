@@ -68,5 +68,16 @@ namespace ATornblad.Conphig.Internals
 
             return input.Select(transformer);
         }
+
+        public static Array ToArrayOfType(this IEnumerable<object> input, Type elementType)
+        {
+            var objectArray = input.ToArray();
+            var outputArray = Array.CreateInstance(elementType, objectArray.Length);
+            for (int i = 0; i < objectArray.Length; ++i)
+            {
+                outputArray.SetValue(objectArray[i], i);
+            }
+            return outputArray;
+        }
     }
 }
