@@ -8,6 +8,7 @@
   <PropertyGroup>
     <PackageId>Conphig</PackageId>
     <Version>0.9.0</Version>
+    <PackageVersion>0.9.0</PackageVersion>
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
     <PackageTags>Configuration;.NET Core;.NET 5</PackageTags>
@@ -16,27 +17,14 @@
       This helper library enables working with configuration data classes that automatically load settings from defaults, from JSON files, from command line arguments, and from environment variables.
     </Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://atornblad.se/conphig</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <CustomCommands>
-      <CustomCommands>
-        <Command>
-          <type>BeforeBuild</type>
-          <command>copy ../LICENSE ./LICENSE</command>
-        </Command>
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <CustomCommands>
-      <CustomCommands>
-        <Command>
-          <type>BeforeBuild</type>
-          <command>copy ../LICENSE ./LICENSE</command>
-        </Command>
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Internals\" />
