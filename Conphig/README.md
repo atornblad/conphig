@@ -55,6 +55,25 @@ namespace MyApp
 }
 ```
 
+## Example of configuration file
+
+``` json
+{
+    "title": "Title from JSON file",
+    "categories": [
+        "API",
+        "Programming",
+        "C#"
+    ]
+}
+```
+
+## Example of command line arguments
+
+``` bash
+myapp -t "Title from Command Line" -c API -c Programming -c bash
+```
+
 ## Read more
 
 For more information, visit the [Project Website](https://atornblad.se/conphig)
