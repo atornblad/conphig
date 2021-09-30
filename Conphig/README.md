@@ -12,7 +12,7 @@ Then, in your `Main` method *(or somewhere else that makes sense given your app 
 
 ## Example configuration class
 
-```
+``` csharp
 using System.Text.Json.Serialization;
 using ATornblad.Conphig;
 
@@ -33,6 +33,24 @@ namespace MyApp
 
         [EnvironmentVariable("API_KEY")]
         public string ApiKey { get; set; }
+    }
+}
+```
+
+## Example of loading
+
+``` csharp
+using System;
+using ATornblad.Conphig;
+namespace MyApp
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var settings = Config.Load<Settings>();
+            Console.WriteLine($"Title: {settings.Title}");
+        }
     }
 }
 ```
