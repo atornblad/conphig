@@ -6,7 +6,7 @@ Conphig is a .NET 5 package for loading configuration from JSON files, command l
 
 After installing the `Conphig` package, create a simple POCO class and place your configuration items as properties inside.
 
-For each property, use the [`JsonPropertyName`](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonpropertynameattribute?view=net-5.0), [`CommandLine`](https://atornblad.se/conphig#commandline-attribute), [`EnvironmentVariable`](https://atornblad.se/conphig#environmentvariable-attribute), and [`Default`](https://atornblad.se/conphig#default-attribute) attributes to control how that property is deserialized from JSON files, command line parameters and environment variables, and what the default value is.
+For each property, use the [`JsonPropertyName`](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonpropertynameattribute?view=net-5.0), [`CommandLine`](https://atornblad.se/conphig#commandline-attribute), and [`EnvironmentVariable`](https://atornblad.se/conphig#environmentvariable-attribute) attributes to control how that property is deserialized from JSON files, command line parameters, and environment variables.
 
 Then, in your `Main` method *(or somewhere else that makes sense given your app startup code)*, add a call to [`Config.Load<T>`](https://atornblad.se/conphig#config-load-t) to create and populate an object containing your configuration items.
 
@@ -21,11 +21,10 @@ namespace MyApp
     [Filename("app-configuration.json")]
     public class Settings
     {
-        [Default("Untitled")]
         [JsonPropertyName("title")]
         [EnvironmentVariable("TITLE")]
         [CommandLine("-t", "--title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = "Untitled";
 
         [JsonPropertyName("Categories")]
         [CommandLine("-c", "--category")]
@@ -33,6 +32,9 @@ namespace MyApp
 
         [EnvironmentVariable("API_KEY")]
         public string ApiKey { get; set; }
+
+        [CommandLine("-v", "--verbose")]
+        public bool VerboseOutput { get; set; }
     }
 }
 ```
@@ -49,7 +51,10 @@ namespace MyApp
         public static void Main(string[] args)
         {
             var settings = Config.Load<Settings>();
-            Console.WriteLine($"Title: {settings.Title}");
+            if (settings.VerboseOutput)
+            {
+                Console.WriteLine($"Title: {settings.Title}");
+            }
         }
     }
 }
@@ -71,7 +76,7 @@ namespace MyApp
 ## Example of command line arguments
 
 ``` bash
-myapp -t "Title from Command Line" -c API -c Programming -c bash
+myapp --verbose -t "Title from Command Line" -c API -c Programming -c bash
 ```
 
 ## Read more

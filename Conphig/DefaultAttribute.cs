@@ -8,6 +8,8 @@ namespace ATornblad.Conphig
     {
         private readonly object value;
         private readonly Type type;
+        // Roadmap: 1.0 Obsolete with warning, 2.0 Obsolete with error, Defaults class removed, 3.0 DefaultAttribute class removed
+        [Obsolete("The Default attribute is obsolete. Please set an initial value to the property instead.", false)]
         public DefaultAttribute(object value)
         {
             this.value = value;

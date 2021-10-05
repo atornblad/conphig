@@ -11,16 +11,14 @@ namespace ConphigTests
         [JsonPropertyName("first")]
         public string FirstNoDefault { get; set; }
 
-        [Default("x")]
         [CommandLine("--second")]
         [EnvironmentVariable("STRING_SECOND")]
         [JsonPropertyName("second")]
-        public string SecondDefaultX { get; set; }
+        public string SecondDefaultX { get; set; } = "x";
 
-        [Default("y")]
         [CommandLine("--third")]
         [EnvironmentVariable("STRING_THIRD")]
         [JsonPropertyName("third")]
-        public string ThirdDefaultY { get; set; }
+        public string ThirdDefaultY { get; set; } = "y";
     }
 }

@@ -7,11 +7,11 @@
 
   <PropertyGroup>
     <PackageId>Conphig</PackageId>
-    <Version>0.9.3</Version>
-    <PackageVersion>0.9.3</PackageVersion>
+    <Version>1.0.0</Version>
+    <PackageVersion>1.0.0</PackageVersion>
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
-    <PackageTags>Configuration;.NET Core;.NET 5</PackageTags>
+    <PackageTags>Configuration;.NETCore;.NET5;net5.0</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>
@@ -22,9 +22,11 @@
     <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
-v0.9.0 : First release
-v0.9.1 : Added support for array properties
+v1.0.0 : First major release. DefaultAttribute is made obsolete.
+v0.9.3 : Minor bug fixes
 v0.9.2 : Added better package documentation
+v0.9.1 : Added support for array properties
+v0.9.0 : First release
     </PackageReleaseNotes>
   </PropertyGroup>
 
