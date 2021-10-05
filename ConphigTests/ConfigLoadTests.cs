@@ -9,8 +9,8 @@ namespace ConphigTests
         [SetUp]
         public void Setup()
         {
-            ATornblad.Conphig.Config.CommandLineArgsGetter = null;
-            ATornblad.Conphig.Config.EnvironmentVariableGetter = null;
+            Config.CommandLineArgsGetter = null;
+            Config.EnvironmentVariableGetter = null;
         }
 
         [Test]
@@ -19,7 +19,7 @@ namespace ConphigTests
             // Arrange
 
             // Act
-            var defaultFileConfig = ATornblad.Conphig.Config.Load<BoolConfiguration>();
+            var defaultFileConfig = Config.Load<BoolConfiguration>();
 
             // Assert
             Assert.IsFalse(defaultFileConfig.NBoolJsonEnvCl.Value);
@@ -28,7 +28,7 @@ namespace ConphigTests
             Assert.IsTrue(defaultFileConfig.BoolJsonEnvCl);
 
             // Act
-            var noConfig = ATornblad.Conphig.Config.Load<BoolConfiguration>("non-existing.json");
+            var noConfig = Config.Load<BoolConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(noConfig.NBoolJsonEnvCl);
@@ -37,7 +37,7 @@ namespace ConphigTests
             Assert.IsFalse(noConfig.BoolJsonEnvCl);
 
             // Act
-            var tfttConfig = ATornblad.Conphig.Config.Load<BoolConfiguration>("bool-configuration-tftt.json");
+            var tfttConfig = Config.Load<BoolConfiguration>("bool-configuration-tftt.json");
 
             // Assert
             Assert.IsTrue(tfttConfig.NBoolJsonEnvCl.Value);
@@ -46,10 +46,10 @@ namespace ConphigTests
             Assert.IsTrue(tfttConfig.BoolJsonEnvCl);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = () => new[] { "--nbooljsonenvclf", "--booljsonenvcl" };
+            Config.CommandLineArgsGetter = () => new[] { "--nbooljsonenvclf", "--booljsonenvcl" };
 
             // Act
-            var cliConfig = ATornblad.Conphig.Config.Load<BoolConfiguration>("non-existing.json");
+            var cliConfig = Config.Load<BoolConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(cliConfig.NBoolJsonEnvCl);
@@ -58,11 +58,11 @@ namespace ConphigTests
             Assert.IsTrue(cliConfig.BoolJsonEnvCl);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = null;
-            ATornblad.Conphig.Config.EnvironmentVariableGetter = (key) => ("NBOOL_JSON_ENV_CL_T" == key) ? "false" : null;
+            Config.CommandLineArgsGetter = null;
+            Config.EnvironmentVariableGetter = (key) => ("NBOOL_JSON_ENV_CL_T" == key) ? "false" : null;
 
             // Act
-            var envConfig = ATornblad.Conphig.Config.Load<BoolConfiguration>("non-existing.json");
+            var envConfig = Config.Load<BoolConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(envConfig.NBoolJsonEnvCl);
@@ -77,7 +77,7 @@ namespace ConphigTests
             // Arrange
 
             // Act
-            var defaultFileConfig = ATornblad.Conphig.Config.Load<FloatConfiguration>();
+            var defaultFileConfig = Config.Load<FloatConfiguration>();
 
             // Assert
             Assert.AreEqual(0.1f, defaultFileConfig.NFloatJsonEnvCl.Value);
@@ -87,7 +87,7 @@ namespace ConphigTests
             Assert.AreEqual(0.5d, defaultFileConfig.DoubleJsonEnvCl3);
 
             // Act
-            var noConfig = ATornblad.Conphig.Config.Load<FloatConfiguration>("non-existing.json");
+            var noConfig = Config.Load<FloatConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(noConfig.NFloatJsonEnvCl);
@@ -97,10 +97,10 @@ namespace ConphigTests
             Assert.AreEqual(3.3d, noConfig.DoubleJsonEnvCl3);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = () => new[] { "--nfloatjsonenvcl1", "1.2", "--floatjsonenvcl", "2.3", "--doublejsonenvcl", "3.4" };
+            Config.CommandLineArgsGetter = () => new[] { "--nfloatjsonenvcl1", "1.2", "--floatjsonenvcl", "2.3", "--doublejsonenvcl", "3.4" };
 
             // Act
-            var cliConfig = ATornblad.Conphig.Config.Load<FloatConfiguration>("non-existing.json");
+            var cliConfig = Config.Load<FloatConfiguration>("non-existing.json");
 
             // Assert
             Assert.AreEqual(1.2f, cliConfig.NFloatJsonEnvCl1.Value);
@@ -108,11 +108,11 @@ namespace ConphigTests
             Assert.AreEqual(3.4d, cliConfig.DoubleJsonEnvCl3);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = null;
-            ATornblad.Conphig.Config.EnvironmentVariableGetter = (key) => ("NDOUBLE_JSON_ENV_CL_2" == key) ? "4.5" : null;
+            Config.CommandLineArgsGetter = null;
+            Config.EnvironmentVariableGetter = (key) => ("NDOUBLE_JSON_ENV_CL_2" == key) ? "4.5" : null;
 
             // Act
-            var envConfig = ATornblad.Conphig.Config.Load<FloatConfiguration>("non-existing.json");
+            var envConfig = Config.Load<FloatConfiguration>("non-existing.json");
 
             // Assert
             Assert.AreEqual(4.5d, envConfig.NDoubleJsonEnvCl2.Value);
@@ -124,7 +124,7 @@ namespace ConphigTests
             // Arrange
 
             // Act
-            var defaultFileConfig = ATornblad.Conphig.Config.Load<IntConfiguration>();
+            var defaultFileConfig = Config.Load<IntConfiguration>();
 
             // Assert
             Assert.AreEqual(3, defaultFileConfig.NIntJsonEnvCl.Value);
@@ -134,7 +134,7 @@ namespace ConphigTests
             Assert.AreEqual(3L, defaultFileConfig.LongJsonEnvCl);
 
             // Act
-            var noConfig = ATornblad.Conphig.Config.Load<IntConfiguration>("non-existing.json");
+            var noConfig = Config.Load<IntConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(noConfig.NIntJsonEnvCl);
@@ -144,7 +144,7 @@ namespace ConphigTests
             Assert.AreEqual(3L, noConfig.LongJsonEnvCl);
 
             // Act
-            var _12n4Config = ATornblad.Conphig.Config.Load<IntConfiguration>("int-configuration-12n4.json");
+            var _12n4Config = Config.Load<IntConfiguration>("int-configuration-12n4.json");
 
             // Assert
             Assert.AreEqual(1, _12n4Config.NIntJsonEnvCl.Value);
@@ -154,10 +154,10 @@ namespace ConphigTests
             Assert.AreEqual(5, _12n4Config.LongJsonEnvCl);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = () => new[] { "--nintjsonenvcl1", "10", "--intjsonenvcl", "20", "--longjsonenvcl", "25" };
+            Config.CommandLineArgsGetter = () => new[] { "--nintjsonenvcl1", "10", "--intjsonenvcl", "20", "--longjsonenvcl", "25" };
 
             // Act
-            var cliConfig = ATornblad.Conphig.Config.Load<IntConfiguration>("non-existing.json");
+            var cliConfig = Config.Load<IntConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(cliConfig.NIntJsonEnvCl);
@@ -167,11 +167,11 @@ namespace ConphigTests
             Assert.AreEqual(25L, cliConfig.LongJsonEnvCl);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = null;
-            ATornblad.Conphig.Config.EnvironmentVariableGetter = (key) => ("NLONG_JSON_ENV_CL_2" == key) ? "30" : ("LONG_JSON_ENV_CL" == key) ? "35" : null;
+            Config.CommandLineArgsGetter = null;
+            Config.EnvironmentVariableGetter = (key) => ("NLONG_JSON_ENV_CL_2" == key) ? "30" : ("LONG_JSON_ENV_CL" == key) ? "35" : null;
 
             // Act
-            var envConfig = ATornblad.Conphig.Config.Load<IntConfiguration>("non-existing.json");
+            var envConfig = Config.Load<IntConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(envConfig.NIntJsonEnvCl);
@@ -187,7 +187,7 @@ namespace ConphigTests
             // Arrange
 
             // Act
-            var defaultFileConfig = ATornblad.Conphig.Config.Load<StringConfiguration>();
+            var defaultFileConfig = Config.Load<StringConfiguration>();
 
             // Assert
             Assert.AreEqual("from-file-first", defaultFileConfig.FirstNoDefault);
@@ -195,7 +195,7 @@ namespace ConphigTests
             Assert.AreEqual("from-file-third", defaultFileConfig.ThirdDefaultY);
 
             // Act
-            var noConfig = ATornblad.Conphig.Config.Load<StringConfiguration>("non-existing.json");
+            var noConfig = Config.Load<StringConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(noConfig.FirstNoDefault);
@@ -203,7 +203,7 @@ namespace ConphigTests
             Assert.AreEqual("y", noConfig.ThirdDefaultY);
 
             // Act
-            var abnConfig = ATornblad.Conphig.Config.Load<StringConfiguration>("string-configuration-abnull.json");
+            var abnConfig = Config.Load<StringConfiguration>("string-configuration-abnull.json");
 
             // Assert
             Assert.AreEqual("a", abnConfig.FirstNoDefault);
@@ -211,10 +211,10 @@ namespace ConphigTests
             Assert.IsNull(abnConfig.ThirdDefaultY);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = () => new[] { "--second", "from-cli" };
+            Config.CommandLineArgsGetter = () => new[] { "--second", "from-cli" };
 
             // Act
-            var cliConfig = ATornblad.Conphig.Config.Load<StringConfiguration>("non-existing.json");
+            var cliConfig = Config.Load<StringConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(cliConfig.FirstNoDefault);
@@ -222,11 +222,11 @@ namespace ConphigTests
             Assert.AreEqual("y", cliConfig.ThirdDefaultY);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = null;
-            ATornblad.Conphig.Config.EnvironmentVariableGetter = (key) => ("STRING_THIRD" == key) ? "from-env" : null;
+            Config.CommandLineArgsGetter = null;
+            Config.EnvironmentVariableGetter = (key) => ("STRING_THIRD" == key) ? "from-env" : null;
 
             // Act
-            var envConfig = ATornblad.Conphig.Config.Load<StringConfiguration>("non-existing.json");
+            var envConfig = Config.Load<StringConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(envConfig.FirstNoDefault);
@@ -240,7 +240,7 @@ namespace ConphigTests
             // Arrange
 
             // Act
-            var noconfig = ATornblad.Conphig.Config.Load<DateTimeConfiguration>("non-existing.json");
+            var noconfig = Config.Load<DateTimeConfiguration>("non-existing.json");
 
             // Assert
             Assert.IsNull(noconfig.NDTDefNull);
@@ -251,7 +251,7 @@ namespace ConphigTests
             Assert.AreEqual(new DateTimeOffset(2021, 2, 3, 4, 5, 6, TimeSpan.Zero), noconfig.DTODefValue);
 
             // Act
-            var defaultfile = ATornblad.Conphig.Config.Load<DateTimeConfiguration>();
+            var defaultfile = Config.Load<DateTimeConfiguration>();
 
             // Assert
             Assert.AreEqual(new DateTime(2021, 9, 28, 19, 0, 0, DateTimeKind.Utc), defaultfile.NDTDefNull.Value);
@@ -259,21 +259,21 @@ namespace ConphigTests
             Assert.AreEqual(new DateTimeOffset(2021, 12, 24, 15, 0, 0, TimeSpan.FromMinutes(120)), defaultfile.DTODefValue);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = () => new[] { "--ndtdefvalue", "1990-01-02T03:04:05Z", "--ndtodefnull", "1980-12-31T23:59:59+01:00" };
+            Config.CommandLineArgsGetter = () => new[] { "--ndtdefvalue", "1990-01-02T03:04:05Z", "--ndtodefnull", "1980-12-31T23:59:59+01:00" };
 
             // Act
-            var cli = ATornblad.Conphig.Config.Load<DateTimeConfiguration>();
+            var cli = Config.Load<DateTimeConfiguration>();
 
             // Assert
             Assert.AreEqual(new DateTime(1990, 1, 2, 3, 4, 5, DateTimeKind.Utc), cli.NDTDefValue);
             Assert.AreEqual(new DateTimeOffset(1980, 12, 31, 23, 59, 59, TimeSpan.FromMinutes(60)), cli.NDTODefNull);
 
             // Arrange
-            ATornblad.Conphig.Config.CommandLineArgsGetter = null;
-            ATornblad.Conphig.Config.EnvironmentVariableGetter = (key) => (key == "NDT_DEF_NULL") ? "1974-05-28T10:00:00Z" : null;
+            Config.CommandLineArgsGetter = null;
+            Config.EnvironmentVariableGetter = (key) => (key == "NDT_DEF_NULL") ? "1974-05-28T10:00:00Z" : null;
 
             // Act
-            var env = ATornblad.Conphig.Config.Load<DateTimeConfiguration>();
+            var env = Config.Load<DateTimeConfiguration>();
 
             // Assert
             Assert.AreEqual(new DateTime(1974, 5, 28, 10, 0, 0, DateTimeKind.Utc), env.NDTDefNull);

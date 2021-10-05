@@ -31,13 +31,13 @@ namespace ATornblad.Conphig
                         {
                             pin.PropertyInfo.SetValue(target, true);
                         }
-                        else
+                        else if (switchIndex < args.Length - 1)
                         {
                             if (type.IsArray)
                             {
                                 var elementType = type.GetElementType();
 
-                                while (switchIndex != -1)
+                                while (switchIndex != -1 && switchIndex < args.Length - 1)
                                 {
                                     object element = Conversion.ChangeType(args[switchIndex + 1], elementType);
 
