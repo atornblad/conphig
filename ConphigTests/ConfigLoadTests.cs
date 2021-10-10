@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ATornblad.Conphig;
 using NUnit.Framework;
 
@@ -323,12 +323,6 @@ namespace ConphigTests
                 new DateTimeOffset(1933, 2, 4, 4, 17, 1, TimeSpan.FromMinutes(300))
             },
             cliConfig.DateTimeOffsets);
-        }
-
-        [Test]
-        public void PrecedenceTests()
-        {
-            // TODO: Test all possible combinations of default value, file value, environment value and command line value
         }
     }
 }
