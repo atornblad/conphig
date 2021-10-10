@@ -23,7 +23,6 @@ namespace ATornblad.Conphig
                     pjpna.JPNAttribute.SwitchNames
                 })
                 .ForEach((pin) => {
-                    var propertyInfo = pin.PropertyInfo;
                     var switchIndices = args.IndicesOfAny(pin.SwitchNames);
                     foreach (var switchIndex in switchIndices)
                     {
