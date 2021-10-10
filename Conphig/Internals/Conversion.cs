@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("ConphigTests")]
 
 namespace ATornblad.Conphig.Internals
 {
-    public static class Conversion
+    internal static class Conversion
     {
         public static object ChangeType(object input, Type targetType)
         {
             var nullable = Nullable.GetUnderlyingType(targetType);
             if (nullable != null)
             {
+                if (object.ReferenceEquals(input, null))
+                {
+                    return Activator.CreateInstance(targetType);
+                }
                 var innerValue = ChangeType(input, nullable);
                 return Activator.CreateInstance(targetType, new object[] { innerValue });
             }
