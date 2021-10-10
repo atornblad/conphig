@@ -7,8 +7,8 @@
 
   <PropertyGroup>
     <PackageId>Conphig</PackageId>
-    <Version>1.0.1</Version>
-    <PackageVersion>1.0.1</PackageVersion>
+    <Version>1.0.2</Version>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
     <PackageTags>Configuration;.NETCore;.NET5;net5.0</PackageTags>
@@ -22,8 +22,10 @@
     <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
+v1.0.2 : Minor bug fixes
 v1.0.1 : Minor bug fixes
 v1.0.0 : First major release. DefaultAttribute is made obsolete.
+
 v0.9.3 : Minor bug fixes
 v0.9.2 : Added better package documentation
 v0.9.1 : Added support for array properties
