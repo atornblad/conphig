@@ -44,10 +44,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          dotnet add Conphig package coverlet.msbuild
           dotnet restore
-          mkdir test-results
-          dotnet test -l trx -r test-results /p:CollectCoverage=true /p:CoverletOutput=test-results/ /p:CoverletOutputFormat=opencover
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"atornblad_conphig" /o:"atornblad" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPath="test-results\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"atornblad_conphig" /o:"atornblad" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --no-restore
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
