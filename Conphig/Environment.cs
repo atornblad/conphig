@@ -22,7 +22,6 @@ namespace ATornblad.Conphig
                     peva.EVarAttribute.VariableName
                 })
                 .ForEach((pivn) => {
-                    object currentValue = pivn.PropertyInfo.GetValue(target);
                     string envValue = getter(pivn.VariableName);
                     if (envValue != null)
                     {

@@ -18,7 +18,6 @@ namespace ATornblad.Conphig.Internals
         }
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
         {
-            int count = collection.Count();
             int index = 0;
             foreach (var item in collection)
             {
@@ -68,7 +67,7 @@ namespace ATornblad.Conphig.Internals
         {
             if (input == null)
             {
-                return new TOut[0];
+                return Array.Empty<TOut>();
             }
 
             return input.Select(transformer);

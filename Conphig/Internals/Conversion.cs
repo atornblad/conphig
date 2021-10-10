@@ -25,7 +25,7 @@ namespace ATornblad.Conphig.Internals
                 }
             }
 
-            if (targetType.IsAssignableFrom(input.GetType()))
+            if (input.GetType().IsInstanceOfType(targetType))
             {
                 return input;
             }
