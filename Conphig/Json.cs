@@ -84,59 +84,74 @@ namespace ATornblad.Conphig
             }
             else if (value.ValueKind == JsonValueKind.True || value.ValueKind == JsonValueKind.False)
             {
-                if (outputType == typeof(bool))
-                {
-                    return value.GetBoolean();
-                }
-                else
-                {
-                    throw new InvalidOperationException($"Converting JSON property {elementName} from boolean to {outputType.FullName}");
-                }
+                return HandleBoolean(value, outputType, elementName);
             }
             else if (value.ValueKind == JsonValueKind.String)
             {
-                if (outputType == typeof(string))
-                {
-                    return value.GetString();
-                }
-                else
-                {
-                    return Conversion.ChangeType(value.GetString(), outputType);
-                }
+                return HandleString(value, outputType);
             }
             else if (value.ValueKind == JsonValueKind.Number)
             {
-                if (outputType == typeof(int))
-                {
-                    return value.GetInt32();
-                }
-                else if (outputType == typeof(long))
-                {
-                    return value.GetInt64();
-                }
-                else if (outputType == typeof(float))
-                {
-                    return value.GetSingle();
-                }
-                else if (outputType == typeof(double))
-                {
-                    return value.GetDouble();
-                }
-                else
-                {
-                    try
-                    {
-                        return Conversion.ChangeType(value.GetString(), outputType);
-                    }
-                    catch
-                    {
-                        throw new InvalidOperationException($"Converting JSON property {elementName} from string to {outputType.FullName}");
-                    }
-                }
+                return HandleNumber(value, outputType, elementName);
             }
             else
             {
                 throw new NotImplementedException($"Converting JSON property {elementName} from {value.ValueKind}");
+            }
+        }
+
+        private static object HandleBoolean(JsonElement value, Type outputType, string elementName)
+        {
+            if (outputType == typeof(bool))
+            {
+                return value.GetBoolean();
+            }
+            else
+            {
+                throw new InvalidOperationException($"Converting JSON property {elementName} from boolean to {outputType.FullName}");
+            }
+        }
+
+        private static object HandleString(JsonElement value, Type outputType)
+        {
+            if (outputType == typeof(string))
+            {
+                return value.GetString();
+            }
+            else
+            {
+                return Conversion.ChangeType(value.GetString(), outputType);
+            }
+        }
+
+        private static object HandleNumber(JsonElement value, Type outputType, string elementName)
+        {
+            if (outputType == typeof(int))
+            {
+                return value.GetInt32();
+            }
+            else if (outputType == typeof(long))
+            {
+                return value.GetInt64();
+            }
+            else if (outputType == typeof(float))
+            {
+                return value.GetSingle();
+            }
+            else if (outputType == typeof(double))
+            {
+                return value.GetDouble();
+            }
+            else
+            {
+                try
+                {
+                    return Conversion.ChangeType(value.GetString(), outputType);
+                }
+                catch
+                {
+                    throw new InvalidOperationException($"Converting JSON property {elementName} from string to {outputType.FullName}");
+                }
             }
         }
     }
