@@ -63,6 +63,16 @@ namespace ATornblad.Conphig.Internals
             return -1;
         }
 
+        public static IEnumerable<int> IndicesOfAny<T>(this T[] array, IEnumerable<T> values) where T : IEquatable<T>
+        {
+            int next = IndexOfAny(array, values);
+            while (next != -1)
+            {
+                yield return next;
+                next = IndexOfAny(array, values, next + 1);
+            }
+        }
+
         public static IEnumerable<TOut> SelectAllowNull<TIn, TOut>(this IEnumerable<TIn> input, Func<TIn, TOut> transformer)
         {
             if (input == null)
@@ -82,6 +92,18 @@ namespace ATornblad.Conphig.Internals
                 outputArray.SetValue(objectArray[i], i);
             }
             return outputArray;
+        }
+
+        public static Array ExtendWith(this Array array, Type elementType, object element)
+        {
+            int currentLength = array.GetLength(0);
+            var newArray = Array.CreateInstance(elementType, currentLength + 1);
+            for (int i = 0; i < currentLength; ++i)
+            {
+                newArray.SetValue(array.GetValue(i), i);
+            }
+            newArray.SetValue(element, currentLength);
+            return newArray;
         }
     }
 }
