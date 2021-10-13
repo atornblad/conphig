@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>ATornblad.Conphig.Help</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Conphig.Help</PackageId>
+    <Version>0.9.0</Version>
+    <PackageVersion>0.9.0</PackageVersion>
+    <Authors>Anders Marzi Tornblad</Authors>
+    <Company>Anders Marzi Tornblad</Company>
+    <PackageTags>Configuration;.NETCore;.NET5;net5.0</PackageTags>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>
+      This extension to the Conphig library generates end-user help for correctly applying configuration based on Conphig.
+    </Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://atornblad.se/conphig</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+v0.9.0 : First release - only Console.WriteLine support for now
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup> 
+    <None Include="README.md" Pack="true" PackagePath="/"> 
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory> 
+    </None> 
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Conphig" Version="1.0.*" />
+  </ItemGroup> 
+</Project>
