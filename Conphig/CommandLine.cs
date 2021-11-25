@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -11,6 +12,9 @@ namespace ATornblad.Conphig
         public static void Apply<T>(T target, string[] commandLineArgs = null)
         {
             var args = commandLineArgs ?? System.Environment.GetCommandLineArgs();
+
+            // Transform compact bool args to split form
+            args = SplitCompactBoolArgs(args).ToArray();
 
             typeof(T).GetProperties()
                 .Select(p => new {
@@ -29,6 +33,24 @@ namespace ATornblad.Conphig
                         HandleProperty(target, args, pin.PropertyInfo, switchIndex);
                     }
                 });
+        }
+
+        private static IEnumerable<string> SplitCompactBoolArgs(string[] args)
+        {
+            foreach (string arg in args)
+            {
+                if (arg.StartsWith("-") && !arg.StartsWith("--") && arg.Length >= 4)
+                {
+                    for (int i = 1; i < arg.Length; ++i)
+                    {
+                        yield return $"-{arg[i]}";
+                    }
+                }
+                else
+                {
+                    yield return arg;
+                }
+            }
         }
 
         private static void HandleProperty<T>(T target, string[] args, PropertyInfo propertyInfo, int switchIndex)

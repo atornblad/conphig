@@ -57,6 +57,18 @@ namespace ConphigTests
             Assert.IsTrue(cliConfig.NBoolJsonEnvClF.Value);
             Assert.IsTrue(cliConfig.BoolJsonEnvCl);
 
+            // Arrange for compact bool arguments
+            Config.CommandLineArgsGetter = () => new [] { "-abd" };
+
+            // Act
+            var cliConfig2 = Config.Load<BoolConfiguration>("non-existing.json");
+
+            // Assert
+            Assert.IsTrue(cliConfig2.NBoolJsonEnvCl.Value);
+            Assert.IsTrue(cliConfig2.NBoolJsonEnvClT.Value);
+            Assert.IsFalse(cliConfig2.NBoolJsonEnvClF.Value);
+            Assert.IsTrue(cliConfig2.BoolJsonEnvCl);
+
             // Arrange
             Config.CommandLineArgsGetter = null;
             Config.EnvironmentVariableGetter = (key) => ("NBOOL_JSON_ENV_CL_T" == key) ? "false" : null;
