@@ -41,6 +41,6 @@ v0.9.0 : First release - only Console.WriteLine support for now
     </None> 
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Conphig" Version="1.0.*" />
-  </ItemGroup> 
+    <ProjectReference Include="..\Conphig\Conphig.csproj" />
+  </ItemGroup>
 </Project>

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConphigTests", "ConphigTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conphig", "Conphig\Conphig.csproj", "{293EDB47-C8A6-4C29-8B05-DBEA2702060C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conphig.Help.Tests", "Conphig.Help.Tests\Conphig.Help.Tests.csproj", "{d70481c3-6fc4-4466-9662-82f300365981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conphig.Help", "Conphig.Help\Conphig.Help.csproj", "{46611a1a-5502-4c3a-9aaa-f6a903b7b779}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{2D1E66CF-6ADB-4AB6-BEFB-ADB0ECF998A1}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
@@ -32,6 +36,14 @@ Global
 		{293EDB47-C8A6-4C29-8B05-DBEA2702060C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{293EDB47-C8A6-4C29-8B05-DBEA2702060C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{293EDB47-C8A6-4C29-8B05-DBEA2702060C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{d70481c3-6fc4-4466-9662-82f300365981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d70481c3-6fc4-4466-9662-82f300365981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d70481c3-6fc4-4466-9662-82f300365981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d70481c3-6fc4-4466-9662-82f300365981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46611a1a-5502-4c3a-9aaa-f6a903b7b779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46611a1a-5502-4c3a-9aaa-f6a903b7b779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46611a1a-5502-4c3a-9aaa-f6a903b7b779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46611a1a-5502-4c3a-9aaa-f6a903b7b779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
