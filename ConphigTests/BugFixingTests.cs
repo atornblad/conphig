@@ -42,10 +42,10 @@ namespace ConphigTests
         public class CommandLineIndexOutOfRangeBugConfig
         {
             [CommandLine("--switch")]
-            public string Value { get; set; }
+            public string? Value { get; set; }
 
             [CommandLine("--array")]
-            public string[] Values { get; set; }
+            public string[]? Values { get; set; }
         }
     }
 }

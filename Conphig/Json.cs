@@ -26,13 +26,13 @@ namespace ATornblad.Conphig
                         .Select(p => new
                         {
                             PropertyInfo = p,
-                            JPNAttribute = (JsonPropertyNameAttribute)p.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false).FirstOrDefault()
+                            JPNAttribute = (JsonPropertyNameAttribute?)p.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false).FirstOrDefault()
                         })
                         .Where(pjpna => pjpna.JPNAttribute != null)
                         .Select(pjpna => new
                         {
                             pjpna.PropertyInfo,
-                            pjpna.JPNAttribute.Name
+                            pjpna.JPNAttribute!.Name
                         })
                         .ToDictionary(pin => pin.Name, pin => pin.PropertyInfo);
                     foreach (var element in document.RootElement.EnumerateObject())
@@ -48,15 +48,15 @@ namespace ATornblad.Conphig
 
         private static void SetValue<T>(T config, PropertyInfo propertyInfo, string elementName, JsonElement value) where T : class, new()
         {
-            object valueToSet = GetValue(propertyInfo.PropertyType, elementName, value);
+            object? valueToSet = GetValue(propertyInfo.PropertyType, elementName, value);
             propertyInfo.SetValue(config, valueToSet);
         }
 
-        private static object GetValue(Type outputType, string elementName, JsonElement value)
+        private static object? GetValue(Type outputType, string elementName, JsonElement value)
         {
             if (outputType.IsArray)
             {
-                var elementType = outputType.GetElementType();
+                var elementType = outputType.GetElementType()!;
 
                 return Enumerable.Range(0, value.GetArrayLength())
                     .Select(i => GetValue(elementType, $"{elementName}[{i}]", value[i]))
@@ -111,7 +111,7 @@ namespace ATornblad.Conphig
             }
         }
 
-        private static object HandleString(JsonElement value, Type outputType)
+        private static object? HandleString(JsonElement value, Type outputType)
         {
             if (outputType == typeof(string))
             {
@@ -123,7 +123,7 @@ namespace ATornblad.Conphig
             }
         }
 
-        private static object HandleNumber(JsonElement value, Type outputType, string elementName)
+        private static object? HandleNumber(JsonElement value, Type outputType, string elementName)
         {
             if (outputType == typeof(int))
             {

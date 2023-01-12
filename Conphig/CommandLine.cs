@@ -7,19 +7,19 @@ namespace ATornblad.Conphig
 {
     internal static class CommandLine
     {
-        public static void Apply<T>(T target, string[] commandLineArgs = null)
+        public static void Apply<T>(T target, string[]? commandLineArgs = null)
         {
             var args = commandLineArgs ?? System.Environment.GetCommandLineArgs();
 
             typeof(T).GetProperties()
                 .Select(p => new {
                     PropertyInfo = p,
-                    JPNAttribute = (CommandLineAttribute)p.GetCustomAttributes(typeof(CommandLineAttribute), false).FirstOrDefault()
+                    JPNAttribute = (CommandLineAttribute?)p.GetCustomAttributes(typeof(CommandLineAttribute), false).FirstOrDefault()
                 })
                 .Where(pjpna => pjpna.JPNAttribute != null)
                 .Select(pjpna => new {
                     pjpna.PropertyInfo,
-                    pjpna.JPNAttribute.SwitchNames
+                    pjpna.JPNAttribute!.SwitchNames
                 })
                 .ForEach((pin) => {
                     var switchIndices = args.IndicesOfAny(pin.SwitchNames);
@@ -44,10 +44,10 @@ namespace ATornblad.Conphig
                 {
                     if (type.IsArray)
                     {
-                        var elementType = type.GetElementType();
+                        var elementType = type.GetElementType()!;
                         var element = Conversion.ChangeType(args[switchIndex + 1], elementType);
 
-                        object existingValue = propertyInfo.GetValue(target);
+                        object? existingValue = propertyInfo.GetValue(target);
                         if (existingValue == null)
                         {
                             // Make new array with one element

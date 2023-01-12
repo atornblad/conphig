@@ -9,7 +9,7 @@ namespace ConphigTests
         [CommandLine("--first")]
         [EnvironmentVariable("STRING_FIRST")]
         [JsonPropertyName("first")]
-        public string FirstNoDefault { get; set; }
+        public string? FirstNoDefault { get; set; }
 
         [CommandLine("--second")]
         [EnvironmentVariable("STRING_SECOND")]

@@ -6,8 +6,8 @@ namespace ATornblad.Conphig
 {
     public static class Config
     {
-        public static Func<string[]> CommandLineArgsGetter { get; set; } = null;
-        public static Func<string, string> EnvironmentVariableGetter { get; set; } = null;
+        public static Func<string[]>? CommandLineArgsGetter { get; set; } = null;
+        public static Func<string, string?>? EnvironmentVariableGetter { get; set; } = null;
 
         public static T Load<T>() where T : class, new()
         {

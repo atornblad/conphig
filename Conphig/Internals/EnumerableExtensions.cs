@@ -83,7 +83,7 @@ namespace ATornblad.Conphig.Internals
             return input.Select(transformer);
         }
 
-        public static Array ToArrayOfType(this IEnumerable<object> input, Type elementType)
+        public static Array ToArrayOfType(this IEnumerable<object?> input, Type elementType)
         {
             var objectArray = input.ToArray();
             var outputArray = Array.CreateInstance(elementType, objectArray.Length);
@@ -94,7 +94,7 @@ namespace ATornblad.Conphig.Internals
             return outputArray;
         }
 
-        public static Array ExtendWith(this Array array, Type elementType, object element)
+        public static Array ExtendWith(this Array array, Type elementType, object? element)
         {
             int currentLength = array.GetLength(0);
             var newArray = Array.CreateInstance(elementType, currentLength + 1);

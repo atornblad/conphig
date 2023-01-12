@@ -8,7 +8,7 @@ namespace ATornblad.Conphig.Internals
 {
     internal static class Conversion
     {
-        public static object ChangeType(object input, Type targetType)
+        public static object? ChangeType(object? input, Type targetType)
         {
             var nullable = Nullable.GetUnderlyingType(targetType);
             if (nullable != null)
@@ -18,7 +18,7 @@ namespace ATornblad.Conphig.Internals
                     return Activator.CreateInstance(targetType);
                 }
                 var innerValue = ChangeType(input, nullable);
-                return Activator.CreateInstance(targetType, new object[] { innerValue });
+                return Activator.CreateInstance(targetType, new object?[] { innerValue });
             }
             if (input == null)
             {
@@ -52,7 +52,7 @@ namespace ATornblad.Conphig.Internals
             }
         }
 
-        private static object ConvertString(string str, Type targetType)
+        private static object? ConvertString(string str, Type targetType)
         {
             if (str.Length == 0 && targetType.IsClass)
             {

@@ -22,9 +22,9 @@ namespace ConphigTests
             var defaultFileConfig = Config.Load<BoolConfiguration>();
 
             // Assert
-            Assert.IsFalse(defaultFileConfig.NBoolJsonEnvCl.Value);
-            Assert.IsTrue(defaultFileConfig.NBoolJsonEnvClT.Value);
-            Assert.IsFalse(defaultFileConfig.NBoolJsonEnvClF.Value);
+            Assert.IsFalse(defaultFileConfig.NBoolJsonEnvCl!.Value);
+            Assert.IsTrue(defaultFileConfig.NBoolJsonEnvClT!.Value);
+            Assert.IsFalse(defaultFileConfig.NBoolJsonEnvClF!.Value);
             Assert.IsTrue(defaultFileConfig.BoolJsonEnvCl);
 
             // Act
@@ -32,17 +32,17 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(noConfig.NBoolJsonEnvCl);
-            Assert.IsTrue(noConfig.NBoolJsonEnvClT.Value);
-            Assert.IsFalse(noConfig.NBoolJsonEnvClF.Value);
+            Assert.IsTrue(noConfig.NBoolJsonEnvClT!.Value);
+            Assert.IsFalse(noConfig.NBoolJsonEnvClF!.Value);
             Assert.IsFalse(noConfig.BoolJsonEnvCl);
 
             // Act
             var tfttConfig = Config.Load<BoolConfiguration>("bool-configuration-tftt.json");
 
             // Assert
-            Assert.IsTrue(tfttConfig.NBoolJsonEnvCl.Value);
-            Assert.IsFalse(tfttConfig.NBoolJsonEnvClT.Value);
-            Assert.IsTrue(tfttConfig.NBoolJsonEnvClF.Value);
+            Assert.IsTrue(tfttConfig.NBoolJsonEnvCl!.Value);
+            Assert.IsFalse(tfttConfig.NBoolJsonEnvClT!.Value);
+            Assert.IsTrue(tfttConfig.NBoolJsonEnvClF!.Value);
             Assert.IsTrue(tfttConfig.BoolJsonEnvCl);
 
             // Arrange
@@ -53,8 +53,8 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(cliConfig.NBoolJsonEnvCl);
-            Assert.IsTrue(cliConfig.NBoolJsonEnvClT.Value);
-            Assert.IsTrue(cliConfig.NBoolJsonEnvClF.Value);
+            Assert.IsTrue(cliConfig.NBoolJsonEnvClT!.Value);
+            Assert.IsTrue(cliConfig.NBoolJsonEnvClF!.Value);
             Assert.IsTrue(cliConfig.BoolJsonEnvCl);
 
             // Arrange
@@ -66,8 +66,8 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(envConfig.NBoolJsonEnvCl);
-            Assert.IsFalse(envConfig.NBoolJsonEnvClT.Value);
-            Assert.IsFalse(envConfig.NBoolJsonEnvClF.Value);
+            Assert.IsFalse(envConfig.NBoolJsonEnvClT!.Value);
+            Assert.IsFalse(envConfig.NBoolJsonEnvClF!.Value);
             Assert.IsFalse(envConfig.BoolJsonEnvCl);
         }
 
@@ -80,9 +80,9 @@ namespace ConphigTests
             var defaultFileConfig = Config.Load<FloatConfiguration>();
 
             // Assert
-            Assert.AreEqual(0.1f, defaultFileConfig.NFloatJsonEnvCl.Value);
-            Assert.AreEqual(0.2f, defaultFileConfig.NFloatJsonEnvCl1.Value);
-            Assert.AreEqual(0.3d, defaultFileConfig.NDoubleJsonEnvCl2.Value);
+            Assert.AreEqual(0.1f, defaultFileConfig.NFloatJsonEnvCl!.Value);
+            Assert.AreEqual(0.2f, defaultFileConfig.NFloatJsonEnvCl1!.Value);
+            Assert.AreEqual(0.3d, defaultFileConfig.NDoubleJsonEnvCl2!.Value);
             Assert.AreEqual(0.4f, defaultFileConfig.FloatJsonEnvCl);
             Assert.AreEqual(0.5d, defaultFileConfig.DoubleJsonEnvCl3);
 
@@ -91,8 +91,8 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(noConfig.NFloatJsonEnvCl);
-            Assert.AreEqual(1.1f, noConfig.NFloatJsonEnvCl1.Value);
-            Assert.AreEqual(2.2d, noConfig.NDoubleJsonEnvCl2.Value);
+            Assert.AreEqual(1.1f, noConfig.NFloatJsonEnvCl1!.Value);
+            Assert.AreEqual(2.2d, noConfig.NDoubleJsonEnvCl2!.Value);
             Assert.AreEqual(0.0f, noConfig.FloatJsonEnvCl);
             Assert.AreEqual(3.3d, noConfig.DoubleJsonEnvCl3);
 
@@ -103,7 +103,7 @@ namespace ConphigTests
             var cliConfig = Config.Load<FloatConfiguration>("non-existing.json");
 
             // Assert
-            Assert.AreEqual(1.2f, cliConfig.NFloatJsonEnvCl1.Value);
+            Assert.AreEqual(1.2f, cliConfig.NFloatJsonEnvCl1!.Value);
             Assert.AreEqual(2.3f, cliConfig.FloatJsonEnvCl);
             Assert.AreEqual(3.4d, cliConfig.DoubleJsonEnvCl3);
 
@@ -115,7 +115,7 @@ namespace ConphigTests
             var envConfig = Config.Load<FloatConfiguration>("non-existing.json");
 
             // Assert
-            Assert.AreEqual(4.5d, envConfig.NDoubleJsonEnvCl2.Value);
+            Assert.AreEqual(4.5d, envConfig.NDoubleJsonEnvCl2!.Value);
         }
 
         [Test]
@@ -127,9 +127,9 @@ namespace ConphigTests
             var defaultFileConfig = Config.Load<IntConfiguration>();
 
             // Assert
-            Assert.AreEqual(3, defaultFileConfig.NIntJsonEnvCl.Value);
-            Assert.AreEqual(1, defaultFileConfig.NIntJsonEnvCl1.Value);
-            Assert.AreEqual(2L, defaultFileConfig.NLongJsonEnvCl2.Value);
+            Assert.AreEqual(3, defaultFileConfig.NIntJsonEnvCl!.Value);
+            Assert.AreEqual(1, defaultFileConfig.NIntJsonEnvCl1!.Value);
+            Assert.AreEqual(2L, defaultFileConfig.NLongJsonEnvCl2!.Value);
             Assert.AreEqual(4, defaultFileConfig.IntJsonEnvCl);
             Assert.AreEqual(3L, defaultFileConfig.LongJsonEnvCl);
 
@@ -138,8 +138,8 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(noConfig.NIntJsonEnvCl);
-            Assert.AreEqual(1, noConfig.NIntJsonEnvCl1.Value);
-            Assert.AreEqual(2L, noConfig.NLongJsonEnvCl2.Value);
+            Assert.AreEqual(1, noConfig.NIntJsonEnvCl1!.Value);
+            Assert.AreEqual(2L, noConfig.NLongJsonEnvCl2!.Value);
             Assert.AreEqual(0, noConfig.IntJsonEnvCl);
             Assert.AreEqual(3L, noConfig.LongJsonEnvCl);
 
@@ -147,8 +147,8 @@ namespace ConphigTests
             var _12n4Config = Config.Load<IntConfiguration>("int-configuration-12n4.json");
 
             // Assert
-            Assert.AreEqual(1, _12n4Config.NIntJsonEnvCl.Value);
-            Assert.AreEqual(2, _12n4Config.NIntJsonEnvCl1.Value);
+            Assert.AreEqual(1, _12n4Config.NIntJsonEnvCl!.Value);
+            Assert.AreEqual(2, _12n4Config.NIntJsonEnvCl1!.Value);
             Assert.IsNull(_12n4Config.NLongJsonEnvCl2);
             Assert.AreEqual(4, _12n4Config.IntJsonEnvCl);
             Assert.AreEqual(5, _12n4Config.LongJsonEnvCl);
@@ -161,8 +161,8 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(cliConfig.NIntJsonEnvCl);
-            Assert.AreEqual(10, cliConfig.NIntJsonEnvCl1.Value);
-            Assert.AreEqual(2L, cliConfig.NLongJsonEnvCl2.Value);
+            Assert.AreEqual(10, cliConfig.NIntJsonEnvCl1!.Value);
+            Assert.AreEqual(2L, cliConfig.NLongJsonEnvCl2!.Value);
             Assert.AreEqual(20, cliConfig.IntJsonEnvCl);
             Assert.AreEqual(25L, cliConfig.LongJsonEnvCl);
 
@@ -175,8 +175,8 @@ namespace ConphigTests
 
             // Assert
             Assert.IsNull(envConfig.NIntJsonEnvCl);
-            Assert.AreEqual(1, envConfig.NIntJsonEnvCl1.Value);
-            Assert.AreEqual(30L, envConfig.NLongJsonEnvCl2.Value);
+            Assert.AreEqual(1, envConfig.NIntJsonEnvCl1!.Value);
+            Assert.AreEqual(30L, envConfig.NLongJsonEnvCl2!.Value);
             Assert.AreEqual(0, envConfig.IntJsonEnvCl);
             Assert.AreEqual(35L, envConfig.LongJsonEnvCl);
         }
@@ -245,8 +245,8 @@ namespace ConphigTests
             // Assert
             Assert.IsNull(noconfig.NDTDefNull);
             Assert.IsNull(noconfig.NDTODefNull);
-            Assert.AreEqual(new DateTime(2020, 2, 3, 4, 5, 6, DateTimeKind.Utc), noconfig.NDTDefValue.Value);
-            Assert.AreEqual(new DateTimeOffset(2020, 2, 3, 4, 5, 6, TimeSpan.Zero), noconfig.NDTODefValue.Value);
+            Assert.AreEqual(new DateTime(2020, 2, 3, 4, 5, 6, DateTimeKind.Utc), noconfig.NDTDefValue!.Value);
+            Assert.AreEqual(new DateTimeOffset(2020, 2, 3, 4, 5, 6, TimeSpan.Zero), noconfig.NDTODefValue!.Value);
             Assert.AreEqual(new DateTime(2021, 2, 3, 4, 5, 6, DateTimeKind.Utc), noconfig.DTDefValue);
             Assert.AreEqual(new DateTimeOffset(2021, 2, 3, 4, 5, 6, TimeSpan.Zero), noconfig.DTODefValue);
 
@@ -254,7 +254,7 @@ namespace ConphigTests
             var defaultfile = Config.Load<DateTimeConfiguration>();
 
             // Assert
-            Assert.AreEqual(new DateTime(2021, 9, 28, 19, 0, 0, DateTimeKind.Utc), defaultfile.NDTDefNull.Value);
+            Assert.AreEqual(new DateTime(2021, 9, 28, 19, 0, 0, DateTimeKind.Utc), defaultfile.NDTDefNull!.Value);
             Assert.IsNull(defaultfile.NDTDefValue);
             Assert.AreEqual(new DateTimeOffset(2021, 12, 24, 15, 0, 0, TimeSpan.FromMinutes(120)), defaultfile.DTODefValue);
 
