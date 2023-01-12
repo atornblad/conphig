@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using ATornblad.Conphig.Internals;
 
 namespace ATornblad.Conphig
@@ -31,7 +24,6 @@ namespace ATornblad.Conphig
         {
             T config = new();
 
-            Defaults.Apply(config);
             Json.Apply(config, filename);
             Environment.Apply(config, EnvironmentVariableGetter);
             CommandLine.Apply(config, CommandLineArgsGetter == null ? null : CommandLineArgsGetter());

@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>ATornblad.Conphig</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Conphig</PackageId>
-    <Version>1.0.2</Version>
-    <PackageVersion>1.0.2</PackageVersion>
+    <Version>2.0.0</Version>
+    <PackageVersion>2.0.0</PackageVersion>
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
-    <PackageTags>Configuration;.NETCore;.NET5;net5.0</PackageTags>
+    <PackageTags>Configuration;.NETCore;.NET6;net6.0</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>
@@ -22,6 +22,9 @@
     <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
+v2.0.0 : DefaultAttribute made obsolete
+
+v1.0.3 : Ported to .NET 6.0
 v1.0.2 : Minor bug fixes
 v1.0.1 : Minor bug fixes
 v1.0.0 : First major release. DefaultAttribute is made obsolete.
