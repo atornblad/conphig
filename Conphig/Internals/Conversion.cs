@@ -86,6 +86,10 @@ namespace ATornblad.Conphig.Internals
             {
                 return double.Parse(str, NumberStyles.Float, CultureInfo.InvariantCulture);
             }
+            else if (targetType.IsEnum)
+            {
+                return Enum.Parse(targetType, str, true);
+            }
             else
             {
                 try
