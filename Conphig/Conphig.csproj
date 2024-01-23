@@ -9,8 +9,8 @@
 
   <PropertyGroup>
     <PackageId>Conphig</PackageId>
-    <Version>2.0.1</Version>
-    <PackageVersion>2.0.1</PackageVersion>
+    <Version>2.1.0</Version>
+    <PackageVersion>2.1.0</PackageVersion>
     <Authors>Anders Marzi Tornblad</Authors>
     <Company>Anders Marzi Tornblad</Company>
     <PackageTags>Configuration;.NETCore;.NET6;net6.0</PackageTags>
@@ -24,6 +24,7 @@
     <RepositoryUrl>https://github.com/atornblad/conphig</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
+v2.1.0 : Added support for enum types
 v2.0.1 : Small performance improvement in array parsing, and code clean-up
 v2.0.0 : DefaultAttribute made obsolete
 

@@ -35,6 +35,20 @@ namespace MyApp
 
         [CommandLine("-v", "--verbose")]
         public bool VerboseOutput { get; set; }
+
+        [JsonPropertyName("permissions")]
+        [CommandLine("-p", "--permissions")]
+        public PermissionLevels Permissions { get; set; } = PermissionLevels.None;
+    }
+
+    [Flags]
+    public enum PermissionLevels
+    {
+        None = 0,
+        Create = 1,
+        Read = 2,
+        Edit = 4,
+        Delete = 8
     }
 }
 ```
@@ -69,14 +83,15 @@ namespace MyApp
         "API",
         "Programming",
         "C#"
-    ]
+    ],
+    "permissions": "Create,Read,Edit"
 }
 ```
 
 ## Example of command line arguments
 
 ``` bash
-myapp --verbose -t "Title from Command Line" -c API -c Programming -c bash
+myapp --verbose -t "Title from Command Line" -c API -c Programming -c bash -p Read,Edit
 ```
 
 ## Read more
