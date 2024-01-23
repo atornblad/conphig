@@ -1,0 +1,5 @@
+{
+    "logLevel": "Error",
+    "fileRights": "Read,Execute",
+    "permissions": [ "CreatePage", "EditPage", "CreateUser", "DeleteGroup" ]
+}

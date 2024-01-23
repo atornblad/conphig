@@ -324,5 +324,43 @@ namespace ConphigTests
             },
             cliConfig.DateTimeOffsets);
         }
+
+        [Test]
+        public void EnumTests()
+        {
+            // Arrange
+
+            // Act
+            var fileConfig = Config.Load<EnumConfiguration>();
+
+            // Assert
+            Assert.AreEqual(LogLevel.Error, fileConfig.LogLevel);
+            Assert.AreEqual(FileRights.Read | FileRights.Execute, fileConfig.FileRights);
+            Assert.AreEqual(new[] {
+                Permissions.CreatePage,
+                Permissions.EditPage,
+                Permissions.CreateUser,
+                Permissions.DeleteGroup
+            }, fileConfig.Permissions);
+
+            // Arrange
+            Config.CommandLineArgsGetter = () => new[] {
+                "--log-level", "Fatal",
+                "--file-rights", "Read,Write",
+                "--permissions", "DeletePage",
+                "--permissions", "EditUser",
+            };
+
+            // Act
+            var cliConfig = Config.Load<EnumConfiguration>("non-existing.json");
+
+            // Assert
+            Assert.AreEqual(LogLevel.Fatal, cliConfig.LogLevel);
+            Assert.AreEqual(FileRights.Read | FileRights.Write, cliConfig.FileRights);
+            Assert.AreEqual(new[] {
+                Permissions.DeletePage,
+                Permissions.EditUser
+            }, cliConfig.Permissions);
+        }
     }
 }
