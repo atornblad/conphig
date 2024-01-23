@@ -21,8 +21,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish new version on Nuget
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: Conphig/Conphig.csproj
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+    - name: Package Nuget
+      run: dotnet pack --no-build --no-restore --configuration Release -o . Conphig/Conphig.csproj
+    - name: Publish on Nuget
+      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
